@@ -1,0 +1,1 @@
+A simple task tracking application which uses the Electron framework and Vue for frontend rendering.  The app is designed for personal use over team based use.
