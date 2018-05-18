@@ -1,28 +1,30 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import layoutGetters from './layout/getters'
+import layoutActions from './layout/actions'
+import layoutMutations from './layout/mutations'
+
 Vue.use(Vuex)
 
 export function createStore() {
     return new Vuex.Store({
         state: {
             LeftDrawer: false,
+            boardModal: false,
+            boardList: [],
         },
 
         mutations: {
-            TOGGLE_LEFT_DRAWER(state) {
-                state.LeftDrawer = !state.LeftDrawer
-            }
+            ...layoutMutations
         },
 
         actions: {
-            TOGGLE_LEFT_DRAWER({ commit }) {
-                commit('TOGGLE_LEFT_DRAWER')
-            }
+            ...layoutActions
         },
 
         getters: {
-            LeftDrawer: state => { return state.LeftDrawer }
+            ...layoutGetters
         }
     })
 }

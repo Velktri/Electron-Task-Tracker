@@ -7,23 +7,38 @@
     stateless
     >
 
-    <v-btn color="green">Add New Board</v-btn>
+    <div v-for="(board, i) in boardList" :key="i">
+        Hi this is board {{ i }} with name: "{{ board.name }}"!
+    </div>
+
+    <v-btn color="green" @click="openBoardModal">
+        <v-icon left>add</v-icon>
+        Add New Board
+    </v-btn>
+
+    <board-modal />
 
     </v-navigation-drawer>
 </template>
 
 <script>
+    import BoardModal from './boardModal.vue'
+
     export default {
-        data() {
-            return {
-                BoardList: {}
-            }
+        components: {
+            'board-modal': BoardModal
+        },
+
+        computed: {
+            boardList: {
+                get: function () { return this.$store.getters.getBoardList },
+                set: function () {},
+            },
         },
 
         methods: {
-            createNewBoard() {
-                //create a new board object and add it to the current list.
-                // maybe add popup model for board params
+            openBoardModal() {
+                this.$store.dispatch('OPEN_BOARD_MODAL')
             },
 
             selectBoard() {
