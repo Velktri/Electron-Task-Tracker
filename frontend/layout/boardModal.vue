@@ -25,7 +25,7 @@
                                         :color="data.item"
                                         />
 
-                                        <v-list-tile-content @click="printData(data)">
+                                        <v-list-tile-content>
                                             {{ data.item }}
                                         </v-list-tile-content>
 
@@ -54,12 +54,27 @@
         data() {
             return {
                 colors: [
-                    'green',
                     'red',
-                    'blue',
-                    'yellow',
+                    'pink',
                     'purple',
-                    'orange'
+                    'deep-purple',
+                    'indigo',
+                    'blue',
+                    'light-blue',
+                    'cyan',
+                    'teal',
+                    'green',
+                    'light-green',
+                    'lime',
+                    'yellow',
+                    'amber',
+                    'orange',
+                    'deep-orange',
+                    'brown',
+                    'blue-grey',
+                    'grey',
+                    'black',
+                    'white'
                 ],
 
                 boardName: null,
@@ -91,10 +106,6 @@
 
                 this.closeModal()
             },
-
-            printData(data) {
-                console.log(data)
-            }
         }
     }
 </script>

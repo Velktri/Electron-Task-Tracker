@@ -12,7 +12,12 @@ export function createStore() {
         state: {
             LeftDrawer: false,
             boardModal: false,
-            boardList: [],
+            boardList: [
+                {
+                    name: 'board1',
+                    color: 'purple'
+                }
+            ],
         },
 
         mutations: {
