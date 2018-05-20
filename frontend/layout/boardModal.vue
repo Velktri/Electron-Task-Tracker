@@ -3,24 +3,23 @@
         <v-dialog v-model="$store.state.boardModal" persistent max-width="500px">
             <v-card>
                 <v-card-title>
-                <span class="headline">Create New Board</span>
+                    <span class="headline">Create New Board</span>
                 </v-card-title>
                 <v-card-text>
-                <v-container grid-list-md>
-                    <v-layout wrap>
-                        <v-flex xs12>
-                            <v-text-field label="Board Name" v-model="boardName" required></v-text-field>
-                        </v-flex>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs12>
+                                <v-text-field label="Board Name" v-model="boardName" required></v-text-field>
+                            </v-flex>
 
-                        <v-flex xs12>
-                            <v-select
-                            :items="colors"
-                            label="Color"
-                            required
-                            v-model="selectedColor"
-                            >
-                                <template slot="item" slot-scope="data">
-
+                            <v-flex xs12>
+                                <v-select
+                                :items="colors"
+                                label="Color"
+                                required
+                                v-model="selectedColor"
+                                >
+                                    <template slot="item" slot-scope="data">
                                         <v-list-tile-avatar
                                         :color="data.item"
                                         />
@@ -28,13 +27,11 @@
                                         <v-list-tile-content>
                                             {{ data.item }}
                                         </v-list-tile-content>
-
-                                </template>
-                            </v-select>
-                        </v-flex>
-
-                    </v-layout>
-                </v-container>
+                                    </template>
+                                </v-select>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
                     <small>*indicates required field</small>
                 </v-card-text>
                 <v-card-actions>
@@ -89,7 +86,6 @@
             },
 
             clearData() {
-                // clears all modal inputs
                 this.boardName = null
                 this.selectedColor = null
             },

@@ -3,3 +3,4 @@ build/
 Reference/
 .vscode/
 package-lock.json
+preferences.js

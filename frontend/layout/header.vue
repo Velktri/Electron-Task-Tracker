@@ -42,7 +42,7 @@
             },
 
             closeApp() {
-                ipcRenderer.send('layout:closeApp')
+                ipcRenderer.send('layout:closeApp', this.$store.getters.getBoardList)
             },
 
             minimizeApp() {

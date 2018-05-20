@@ -8,8 +8,7 @@
     >
     <v-container>
         <draggable :list="boardList" :options="{draggable:'.drag-item'}">
-            <template v-for="(board, i) in boardList" 
-            >
+            <template v-for="(board, i) in boardList">
                 <v-card
                 class="white--text pa-2 ma-1 no-highlight drag-item" 
                 :key="i"
@@ -27,7 +26,6 @@
                             <div class="headline white--text no-highlight">{{ board.name }}</div>
                         </v-flex>
                     </v-layout>
-                    
                 </v-card>
             </template>
         </draggable>

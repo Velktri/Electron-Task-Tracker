@@ -1,11 +1,20 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const url = require('url')
+const fs = require('fs')
+const preferences = require('./preferences.js'); 
 
 let mainWindow
 
 function createWindow() {
-    mainWindow = new BrowserWindow({ width: 800, height: 600, frame: false })
+    mainWindow = new BrowserWindow({ 
+        width: 800, 
+        height: 600, 
+        frame: false,
+        backgroundColor: '#303030',
+        show: false,
+
+    })
 
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
@@ -16,7 +25,22 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null
     })
+
+    mainWindow.once('ready-to-show', () => {
+        try {
+            let pathName = path.join(__dirname, 'saveData/save.txt')
+            let BoardList = JSON.parse(fs.readFileSync(pathName, { encoding: "utf8" }))
+            mainWindow.webContents.send('BoardList', BoardList)
+        } catch(error) {
+            console.log(error)
+        }
+
+
+        mainWindow.show()
+    })
 }
+
+
 
 ipcMain.on('layout:openTools', () => {
     let contents = mainWindow.webContents
@@ -26,10 +50,16 @@ ipcMain.on('layout:openTools', () => {
     } else {
         contents.openDevTools({mode: 'detach'})
     }
-    
 })
 
-ipcMain.on('layout:closeApp', () => {
+ipcMain.on('layout:closeApp', (event, arg) => {
+    try {
+        let pathName = path.join(__dirname, 'saveData/save.txt')
+        fs.writeFileSync(pathName, JSON.stringify(arg))
+    } catch (error) {
+        console.log(error)
+    }
+
     app.quit()
 })
 
@@ -48,7 +78,7 @@ ipcMain.on('layout:maximizeApp', () => {
 
 app.on('ready', () => {
     createWindow()
-    BrowserWindow.addDevToolsExtension('C:/Users/Winterfresh/AppData/Local/Google/Chrome/User Data/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/4.1.4_0')
+    BrowserWindow.addDevToolsExtension(preferences.extensionPath)
 })
 
 app.on('window-all-closed', () => {
@@ -60,6 +90,6 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (mainWindow === null) {
         createWindow()
-        BrowserWindow.addDevToolsExtension('C:/Users/Winterfresh/AppData/Local/Google/Chrome/User Data/Default/Extensions/nhdogjmejiglipccpnnnanhbledajbpd/4.1.4_0')
+        BrowserWindow.addDevToolsExtension(preferences.extensionPath)
     }
 })

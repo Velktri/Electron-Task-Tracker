@@ -13,10 +13,22 @@ export function createStore() {
             LeftDrawer: false,
             boardModal: false,
             boardList: [
-                {
-                    name: 'board1',
+                /*{
+                    name: 'board 1',
                     color: 'purple'
-                }
+                },
+                {
+                    name: 'board 2',
+                    color: 'green'
+                },
+                {
+                    name: 'board 3',
+                    color: 'red'
+                },
+                {
+                    name: 'board 4',
+                    color: 'blue'
+                },*/
             ],
         },
 
