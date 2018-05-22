@@ -32,12 +32,6 @@
     import { ipcRenderer } from 'electron'
 
     export default {
-        data() {
-            return {
-                activeTab: 1
-            }
-        },
-
         methods: {
             openDevTools() {
                 ipcRenderer.send('layout:openTools')
@@ -73,6 +67,7 @@
         -webkit-app-region: drag;
         -webkit-user-select: none;
         user-select: none;
+        cursor: default;
     }
 
     .no-drag {

@@ -16,7 +16,6 @@ export default {
     },
 
     LOAD_BOARD_STATE({ commit }, { boardList }) {
-        console.log(boardList)
         commit('SET_BOARD_LIST', { boardList })
     }
 }

@@ -12,7 +12,6 @@ export default {
     },
 
     SET_BOARD_LIST(state, payload) {
-        console.log(payload)
         state.boardList = payload.boardList
     }
 }

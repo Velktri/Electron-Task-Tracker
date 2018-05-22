@@ -3,16 +3,16 @@
     v-model="$store.state.LeftDrawer"
     clipped
     hide-overlay
-
     stateless
     app
-    :mini-variant.sync="mini"
+    :mini-variant.sync="miniClosed"
     >
-        <v-container pa-0 v-if="mini">
+        <!-- mini sidebar -->
+        <v-container pa-0 v-if="bIsMini">
             <draggable :list="boardList" :options="{draggable:'.drag-item'}">
                 <template v-for="(board, i) in boardList">
                     <v-card
-                    class="white--text pa-2 ma-1 no-highlight drag-item" 
+                    class="white--text pa-2 ma-1 no-highlight drag-item"
                     :key="i"
                     flat
                     :color="'blue-grey darken-2'"
@@ -25,7 +25,9 @@
                                     slot="activator"
                                     :color="board.color"
                                     >
-                                    <h1 :class="(board.color === 'black') ? '' : 'black--text'">{{ board.name.charAt(0).toUpperCase() }}</h1>
+                                        <h1 :class="(board.color === 'black') ? '' : 'black--text'">
+                                            {{ board.name.charAt(0).toUpperCase() }}
+                                        </h1>
                                     </v-list-tile-avatar>
 
                                     <span>{{ board.name }}</span>
@@ -45,6 +47,7 @@
             </v-layout>
         </v-container>
 
+        <!-- full sidebar -->
         <v-container v-else>
             <draggable :list="boardList" :options="{draggable:'.drag-item'}">
                 <template v-for="(board, i) in boardList">
@@ -96,8 +99,13 @@
                 set: function () {},
             },
 
-            mini: {
+            bIsMini: {
                 get: function () { return this.$vuetify.breakpoint.smAndDown },
+                set: function () {},
+            },
+
+            miniClosed: {
+                get: function () { return this.$store.state.LeftDrawer && this.$vuetify.breakpoint.smAndDown },
                 set: function () {},
             }
         },
@@ -114,10 +122,6 @@
                 // maybe move this to the board object if one exists.
             }
         },
-
-        mounted () {
-            console.log(this.$vuetify.breakpoint)
-        },
     }
 </script>
 
@@ -125,6 +129,7 @@
     .no-highlight {
         -webkit-user-select: none;
         user-select: none;
+        cursor: default;
     }
 </style>
 
