@@ -2,6 +2,8 @@
     <v-toolbar 
     class="drag"
     flat
+    app
+    clipped-left
     :height = "42">
         <v-toolbar-side-icon class="no-drag" @click.stop="$store.dispatch('TOGGLE_LEFT_DRAWER')" />
         <v-toolbar-title>Title</v-toolbar-title>

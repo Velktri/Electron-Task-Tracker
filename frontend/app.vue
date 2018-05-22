@@ -1,9 +1,11 @@
 <template>
     <v-app dark>
         <app-header />
-        <sidebar> HELLO </sidebar>
-        <v-content>
-
+        <sidebar/>
+        <v-content
+        app
+        >
+            <folder-display />
         </v-content>
 
         
@@ -13,12 +15,14 @@
 <script>
     import Header from './layout/header.vue'
     import Sidebar from './layout/sidebar.vue'
+    import BoardDisplay from './layout/boardDisplay.vue'
     import { ipcRenderer } from 'electron'
 
     export default {
         components: {
             'sidebar': Sidebar,
-            'app-header': Header
+            'app-header': Header,
+            'folder-display': BoardDisplay
         },
 
         mounted() {
