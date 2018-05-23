@@ -5,26 +5,32 @@
     app
     clipped-left
     :height = "42">
-        <v-toolbar-side-icon class="no-drag" @click.stop="$store.dispatch('TOGGLE_LEFT_DRAWER')" />
-        <v-toolbar-title>Title</v-toolbar-title>
+        <v-layout row class="mx-2">
+            <v-flex xs5>
+                <v-toolbar-side-icon class="no-drag" @click.stop="$store.dispatch('TOGGLE_LEFT_DRAWER')" />
+                <v-btn class="ml-4 no-drag" color="purple" small @click="openDevTools">Dev Tools</v-btn>
+            </v-flex>
 
-        <v-btn class="ml-4 no-drag" color="purple" small @click="openDevTools">Dev Tools</v-btn>
+            <v-flex xs2 text-xs-center>
+                <v-toolbar-title>App Name</v-toolbar-title>
+            </v-flex>
 
-        <v-spacer></v-spacer>
+            <v-flex xs5>
+                <v-layout justify-end>
+                    <v-btn class="no-drag" icon :ripple=false @click="minimizeApp">
+                        <v-icon class="mb-2">minimize</v-icon>
+                    </v-btn>
 
-        <div class="no-drag mr-2">
-            <v-btn icon :ripple=false @click="minimizeApp">
-                <v-icon class="mb-2">minimize</v-icon>
-            </v-btn>
+                    <v-btn class="no-drag" icon :ripple=false @click="maximizeApp">
+                        <v-icon>crop_square</v-icon>
+                    </v-btn>
 
-            <v-btn icon :ripple=false @click="maximizeApp">
-                <v-icon>crop_square</v-icon>
-            </v-btn>
-
-            <v-btn icon :ripple=false @click="closeApp">
-                <v-icon>close</v-icon>
-            </v-btn>
-        </div>
+                    <v-btn class="no-drag" icon :ripple=false @click="closeApp">
+                        <v-icon>close</v-icon>
+                    </v-btn>
+                </v-layout>
+            </v-flex>
+        </v-layout>
     </v-toolbar>
 </template>
 
@@ -53,27 +59,6 @@
 </script>
 
 <style scoped>
-    .app-header {
-        background-color: blue;
-        height: 56px;
-        
-    }
-
-    /*.app-header-item {
-        
-    }*/
-
-    .drag {
-        -webkit-app-region: drag;
-        -webkit-user-select: none;
-        user-select: none;
-        cursor: default;
-    }
-
-    .no-drag {
-        -webkit-app-region: no-drag;
-    }
-
     .btn {
         margin: 0px;
     }

@@ -5,6 +5,10 @@ import layoutGetters from './layout/getters'
 import layoutActions from './layout/actions'
 import layoutMutations from './layout/mutations'
 
+import contentGetters from './content/getters'
+import contentActions from './content/actions'
+import contentMutations from './content/mutations'
+
 Vue.use(Vuex)
 
 export function createStore() {
@@ -16,15 +20,18 @@ export function createStore() {
         },
 
         mutations: {
-            ...layoutMutations
+            ...layoutMutations,
+            ...contentMutations
         },
 
         actions: {
-            ...layoutActions
+            ...layoutActions,
+            ...contentActions
         },
 
         getters: {
-            ...layoutGetters
+            ...layoutGetters,
+            ...contentGetters
         }
     })
 }

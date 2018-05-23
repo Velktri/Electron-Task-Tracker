@@ -124,12 +124,3 @@
         },
     }
 </script>
-
-<style scoped>
-    .no-highlight {
-        -webkit-user-select: none;
-        user-select: none;
-        cursor: default;
-    }
-</style>
-

@@ -7,8 +7,6 @@
         >
             <folder-display />
         </v-content>
-
-        
     </v-app>
 </template>
 

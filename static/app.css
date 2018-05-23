@@ -1,1 +1,19 @@
 ::-webkit-scrollbar { display: none; } 
+
+
+.drag {
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag;
+}
+
+.no-highlight {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
