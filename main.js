@@ -29,8 +29,8 @@ function createWindow() {
     mainWindow.once('ready-to-show', () => {
         try {
             let pathName = path.join(__dirname, 'saveData/save.txt')
-            let BoardList = JSON.parse(fs.readFileSync(pathName, { encoding: "utf8" }))
-            mainWindow.webContents.send('BoardList', BoardList)
+            let AppData = JSON.parse(fs.readFileSync(pathName, { encoding: "utf8" }))
+            mainWindow.webContents.send('AppData', AppData)
         } catch(error) {
             console.log(error)
         }

@@ -16,7 +16,9 @@ export function createStore() {
         state: {
             LeftDrawer: false,
             boardModal: false,
+            folderModal: false,
             boardList: [],
+            activeBoard: -1,
         },
 
         mutations: {

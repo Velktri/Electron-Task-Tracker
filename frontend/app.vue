@@ -24,8 +24,8 @@
         },
 
         mounted() {
-            ipcRenderer.on('BoardList', (event, boardList) => {
-                this.$store.dispatch('LOAD_BOARD_STATE', { boardList })
+            ipcRenderer.on('AppData', (event, appData) => {
+                this.$store.dispatch('LOAD_APP_STATE', { appData })
             })
         }
     }

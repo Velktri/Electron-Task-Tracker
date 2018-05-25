@@ -5,5 +5,9 @@ export default {
 
     SET_BOARD_MODAL(state, newState) {
         state.boardModal = newState.payload;
+    },
+
+    SET_FOLDER_MODAL(state, newState) {
+        state.folderModal = newState.payload;
     }
 }

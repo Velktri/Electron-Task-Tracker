@@ -15,8 +15,8 @@
                     class="white--text pa-2 ma-1 no-highlight drag-item"
                     :key="i"
                     flat
-                    :color="'blue-grey darken-2'"
-                    @click.native="selectBoard(board.name)"
+                    :color="(activeBoard === board.id) ? 'blue-grey lighten-1' : 'blue-grey darken-2'"
+                    @click.native="selectBoard(board.id)"
                     >
                         <v-layout row align-center>
                             <v-flex xs12>
@@ -49,23 +49,26 @@
 
         <!-- full sidebar -->
         <v-container v-else>
-            <draggable :list="boardList" :options="{draggable:'.drag-item'}">
+            <draggable v-model="boardList" :options="{draggable:'.drag-item'}">
                 <template v-for="(board, i) in boardList">
                     <v-card
                     class="white--text pa-2 ma-1 no-highlight drag-item" 
                     :key="i"
                     flat
-                    :color="'blue-grey darken-2'"
-                    @click.native="selectBoard(board.name)"
+                    :color="(activeBoard === board.id) ? 'blue-grey lighten-1' : 'blue-grey darken-2'"
+                    @click.native="selectBoard(board.id)"
                     >
                         <v-layout row align-center>
-                            <v-flex xs3>
+                            <v-flex xs2 mr-3>
                                 <v-list-tile-avatar
                                 :color="board.color"
                                 />
                             </v-flex>
-                            <v-flex xs9>
+                            <v-flex wrap xs9>
                                 <div class="headline white--text no-highlight">{{ board.name }}</div>
+                            </v-flex>
+                            <v-flex xs1>
+                                <v-icon>more_vert</v-icon>
                             </v-flex>
                         </v-layout>
                     </v-card>
@@ -96,7 +99,7 @@
         computed: {
             boardList: {
                 get: function () { return this.$store.getters.getBoardList },
-                set: function () {},
+                set: function (value) { this.$store.commit('SET_BOARD_LIST', { boardList: value })},
             },
 
             bIsMini: {
@@ -107,6 +110,11 @@
             miniClosed: {
                 get: function () { return this.$store.state.LeftDrawer && this.$vuetify.breakpoint.smAndDown },
                 set: function () {},
+            },
+
+            activeBoard: {
+                get: function () { return this.$store.getters.getActiveBoardIndex },
+                set: function () {},
             }
         },
 
@@ -115,11 +123,10 @@
                 this.$store.dispatch('OPEN_BOARD_MODAL')
             },
 
-            selectBoard(boardName) {
-                console.log("selected " + boardName)
-                // select an active board from the displayed list
-                // do not select if currently active
-                // maybe move this to the board object if one exists.
+            selectBoard(index) {
+                if (index != this.$store.getters.getActiveBoardIndex) {
+                    this.$store.dispatch('SELECT_ACTIVE_BOARD', { index })
+                }
             }
         },
     }

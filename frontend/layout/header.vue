@@ -6,16 +6,16 @@
     clipped-left
     :height = "42">
         <v-layout row class="mx-2">
-            <v-flex xs5>
+            <v-flex xs4>
                 <v-toolbar-side-icon class="no-drag" @click.stop="$store.dispatch('TOGGLE_LEFT_DRAWER')" />
                 <v-btn class="ml-4 no-drag" color="purple" small @click="openDevTools">Dev Tools</v-btn>
             </v-flex>
 
-            <v-flex xs2 text-xs-center>
+            <v-flex xs5 text-xs-center>
                 <v-toolbar-title>App Name</v-toolbar-title>
             </v-flex>
 
-            <v-flex xs5>
+            <v-flex xs3>
                 <v-layout justify-end>
                     <v-btn class="no-drag" icon :ripple=false @click="minimizeApp">
                         <v-icon class="mb-2">minimize</v-icon>

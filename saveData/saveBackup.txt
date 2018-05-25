@@ -2,7 +2,6 @@
     "activeBoard": 0,
     "boardList": [
         {
-            "id": 0,
             "color": "purple",
             "name": "board 1",
             "folderList": [
@@ -20,12 +19,11 @@
             ]
         },
         {
-            "id": 1,
             "color":"green",
             "name":"board 2",
             "folderList": [
                 {
-                    "title": "folder 1",
+                    "title": "folder 2",
                     "cardList": [
                         {
                             "title": "card 1"

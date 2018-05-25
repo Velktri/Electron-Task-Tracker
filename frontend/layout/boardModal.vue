@@ -9,7 +9,7 @@
                     <v-container grid-list-md>
                         <v-layout wrap>
                             <v-flex xs12>
-                                <v-text-field label="Board Name" v-model="boardName" required></v-text-field>
+                                <v-text-field label="Board Name" v-model="boardName" required />
                             </v-flex>
 
                             <v-flex xs12>
