@@ -1,42 +1,62 @@
 <template>
-    <v-container fluid grid-list-md>
-        <v-layout row justify-end v-show="$store.getters.getActiveBoardIndex !== -1">
-            <v-flex>
-                <v-btn icon color="blue" v-if="bIsMini" @click="openFolderModal" class="pa-0" >
-                    <v-icon>add</v-icon>
-                </v-btn>
+    <div v-show="$store.getters.getActiveBoardIndex !== -1">
 
-                <v-btn v-else color="blue" @click="openFolderModal">
-                    <v-icon left>add</v-icon>
-                    Add Folder
-                </v-btn>
-            </v-flex>
+<!--       <v-container fluid fill-height>
+        <v-layout align-center justify-center>-->
 
-            <v-flex
-            align-end
-            xs12
-            md6
-            >
-                <searchbar />
-            </v-flex>
-        </v-layout>
+        <v-container fluid fill-height class="pa-2">
+            <v-layout align-center justify-center>
+                <v-flex class="px-2">
+                    <h2>{{ $store.getters.getActiveBoard.name }}</h2>
+                </v-flex>
 
-        <v-layout row wrap>
-            <v-flex 
-            xs12
-            md6
-            lg4
-            xl3
-            d-flex 
-            v-for="(folder, i) in folderList"
-            :key="i"
-            >
-                <folder :folderData="folder" />
-            </v-flex>
-        </v-layout>
+                <v-flex>
+                    <searchbar />
+                </v-flex>
+            </v-layout>
+        </v-container>
 
-        <folder-modal />
-    </v-container>
+        <v-divider />
+
+        <v-container fluid grid-list-md>
+            <v-layout row wrap>
+                <v-flex 
+                xs12
+                md6
+                lg4
+                xl3
+                d-flex 
+                v-for="(folder, i) in folderList"
+                :key="i"
+                >
+                    <folder :folderData="folder" />
+                </v-flex>
+
+                <v-flex
+                @click="openFolderModal"
+                xs12
+                md6
+                lg4
+                xl3
+                d-flex 
+                text-xs-center
+                >
+                    <v-card>
+                        <v-container fluid fill-height class="pa-2">
+                            <v-layout align-center justify-center>
+                                <v-flex xs12 class="mx-auto no-highlight">
+                                    <h1>Add Folder</h1>
+                                    <v-icon large>add</v-icon>
+                                </v-flex>
+                            </v-layout>
+                        </v-container>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+
+            <folder-modal />
+        </v-container>
+    </div>
 </template>
 
 <script>
