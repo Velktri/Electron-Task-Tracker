@@ -11,6 +11,7 @@ function createWindow() {
         width: 800, 
         height: 600,
         minWidth: 450,
+        minHeight: 550,
 
         frame: false,
         backgroundColor: '#303030',

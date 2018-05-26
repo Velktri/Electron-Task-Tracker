@@ -2,34 +2,36 @@
     "activeBoard": 0,
     "boardList": [
         {
+            "id": 0,
             "color": "purple",
-            "name": "board 1",
+            "name": "Board 1",
             "folderList": [
                 {
-                    "title": "folder 1",
+                    "title": "Folder 1",
                     "cardList": [
                         {
-                            "title": "card 1"
+                            "title": "Card 1"
                         },
                         {
-                            "title": "card 2"
+                            "title": "Card 2"
                         }
                     ]
                 }
             ]
         },
         {
+            "id": 1,
             "color":"green",
-            "name":"board 2",
+            "name":"Board 2",
             "folderList": [
                 {
-                    "title": "folder 2",
+                    "title": "Folder 1",
                     "cardList": [
                         {
-                            "title": "card 1"
+                            "title": "Card 1"
                         },
                         {
-                            "title": "card 2"
+                            "title": "Card 2"
                         }
                     ]
                 }
