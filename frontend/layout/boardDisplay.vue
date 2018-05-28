@@ -1,17 +1,29 @@
 <template>
-    <div v-show="$store.getters.getActiveBoardIndex !== -1">
-
-<!--       <v-container fluid fill-height>
-        <v-layout align-center justify-center>-->
-
+    <div v-if="$store.getters.getActiveBoardIndex !== -1">
         <v-container fluid fill-height class="pa-2">
             <v-layout align-center justify-center>
-                <v-flex class="px-2">
+                <v-flex xs3 sm5 class="px-2">
                     <h2>{{ $store.getters.getActiveBoard.name }}</h2>
                 </v-flex>
 
-                <v-flex>
-                    <searchbar />
+                <v-flex xs9 sm7>
+                    <v-layout row>
+                        <v-tooltip v-if="bIsMini" bottom class="mr-2">
+                            <v-btn slot="activator" color="teal darken-2" icon @click="openFolderModal">
+                                <v-icon>add</v-icon>
+                            </v-btn>
+
+                            <span>Add Folder</span>
+                        </v-tooltip>
+
+                        <v-btn v-else color="teal darken-2" class="mr-3" @click="openFolderModal">
+                            <v-icon left>add</v-icon>
+                            Add Folder
+                        </v-btn>
+
+                        <searchbar />
+                    </v-layout>
+
                 </v-flex>
             </v-layout>
         </v-container>
@@ -19,40 +31,20 @@
         <v-divider />
 
         <v-container fluid grid-list-md>
-            <v-layout row wrap>
+            <draggable v-model="folderList" element="v-layout" :options="{ draggable:'.drag-folder-item', handle: '.folder-handle' }" row wrap>
                 <v-flex 
                 xs12
                 md6
                 lg4
                 xl3
-                d-flex 
-                v-for="(folder, i) in folderList"
-                :key="i"
-                >
-                    <folder :folderData="folder" />
-                </v-flex>
 
-                <v-flex
-                @click="openFolderModal"
-                xs12
-                md6
-                lg4
-                xl3
-                d-flex 
-                text-xs-center
+                class="drag-folder-item"
+                :key="i"
+                v-for="(folder, i) in folderList"
                 >
-                    <v-card>
-                        <v-container fluid fill-height class="pa-2">
-                            <v-layout align-center justify-center>
-                                <v-flex xs12 class="mx-auto no-highlight">
-                                    <h1>Add Folder</h1>
-                                    <v-icon large>add</v-icon>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card>
+                    <folder class="folder-handle" :folderData="folder" />
                 </v-flex>
-            </v-layout>
+            </draggable>
 
             <folder-modal />
         </v-container>
@@ -63,18 +55,20 @@
     import Folder from '../components/folder.vue'
     import searchbar from './searchBar.vue'
     import folderModal from './addFolderModal.vue'
+    import draggable from 'vuedraggable'
 
     export default {
         components: {
             'folder': Folder,
             'searchbar': searchbar,
-            'folder-modal': folderModal
+            'folder-modal': folderModal,
+            draggable
         },
 
         computed: {
             folderList: {
                 get: function () { return this.$store.getters.getActiveFolderList },
-                set: function () {},
+                set: function (value) { this.$store.commit('SET_FOLDER_LIST', { folderList: value })},
             },
 
             bIsMini: {

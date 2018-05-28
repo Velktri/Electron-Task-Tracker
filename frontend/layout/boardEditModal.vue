@@ -1,15 +1,15 @@
 <template>
     <v-layout row justify-center>
-        <v-dialog v-model="addState" persistent max-width="500px">
+        <v-dialog v-model="editState" persistent max-width="500px">
             <v-card>
                 <v-card-title>
-                    <span class="headline">Create New Board</span>
+                    <span class="headline">Edit Board</span>
                 </v-card-title>
                 <v-card-text>
                     <v-container grid-list-md>
                         <v-layout wrap>
                             <v-flex xs12>
-                                <v-text-field label="Board Name" v-model="boardName" required />
+                                <v-text-field ref="name" label="Board Name" :value="boardName" required />
                             </v-flex>
 
                             <v-flex xs12>
@@ -17,7 +17,8 @@
                                 :items="colors"
                                 label="Color"
                                 required
-                                v-model="selectedColor"
+                                :value="selectedColor"
+                                ref="color"
                                 >
                                     <template slot="item" slot-scope="data">
                                         <v-list-tile-avatar
@@ -35,10 +36,10 @@
                     <small>*indicates required field</small>
                 </v-card-text>
                 <v-card-actions>
+                    <v-btn color="blue darken-1" flat @click.native="deleteBoard">Delete Board</v-btn>
                     <v-spacer />
-                    <v-btn color="blue darken-1" flat @click.native="clearData">Reset</v-btn>
                     <v-btn color="blue darken-1" flat @click.native="closeModal">Cancel</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="submitData">Submit</v-btn>
+                    <v-btn color="blue darken-1" flat @click.native="submitData">Update</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -50,10 +51,31 @@
     import { colors } from '../utils/constants'
 
     export default {
-
         computed: {
-            addState: {
-                get: function () { return this.$store.getters.getBoardModal === boardState.ADD },
+            editState: {
+                get: function () { return this.$store.getters.getBoardModal === boardState.EDIT },
+                set: function () {},
+            },
+
+            boardName: {
+                get: function () {
+                    if (this.$store.getters.getActiveBoard !== undefined) {
+                        return this.$store.getters.getActiveBoard.name 
+                    }
+
+                    return ''
+                },
+                set: function () {},
+            },
+
+            selectedColor: {
+                get: function () {
+                    if (this.$store.getters.getActiveBoard !== undefined) {
+                        return this.$store.getters.getActiveBoard.color 
+                    }
+
+                    return ''
+                },
                 set: function () {},
             },
         },
@@ -62,8 +84,8 @@
             return {
                 colors,
 
-                boardName: null,
-                selectedColor: null
+                //boardName: this.$store.getters.getActiveBoard.name,
+                //selectedColor: this.$store.getters.getActiveBoard.color
             }
         },
 
@@ -78,12 +100,18 @@
                 this.selectedColor = null
             },
 
+            deleteBoard() {
+                this.$store.dispatch('DELETE_ACTIVE_BOARD')
+                this.closeModal()
+            },
+
             submitData() {
+                console.log(this.$refs)
                 if (this.boardName != null && this.selectedColor != null) {
-                    this.$store.dispatch('ADD_NEW_BOARD', {
+                    this.$store.dispatch('EDIT_ACTIVE_BOARD', {
                         board: { 
-                            name: this.boardName,
-                            color: this.selectedColor
+                            name: this.$refs['name'].inputValue,
+                            color: this.$refs['color'].inputValue
                         }
                     })
                 }
@@ -93,4 +121,3 @@
         }
     }
 </script>
-

@@ -8,7 +8,7 @@
         <v-container fill-height fluid class="pa-0">
             <v-layout fill-height wrap>
                 <v-flex xs12 align-end flexbox class="no-highlight">
-                    <v-card-title primary-title>
+                    <v-card-title primary-title class="pa-3 no-highlight">
                         <h1>{{ folderData.title }}</h1>
                     </v-card-title>
                 </v-flex>
