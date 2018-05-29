@@ -12,7 +12,7 @@ export default {
     getActiveFolderList: state => {
         if (state.boardList != undefined) {
             let activeBoard = state.boardList.filter(item => item.id === state.activeBoard)[0]
-            if(activeBoard != undefined && activeBoard.folderList != undefined) {
+            if (activeBoard != undefined && activeBoard.folderList != undefined) {
                 return activeBoard.folderList
             }
 
