@@ -1,6 +1,6 @@
 <template>
         <v-layout row justify-center>
-        <v-dialog v-model="$store.state.folderModal" persistent max-width="500px">
+        <v-dialog v-model="addState" persistent max-width="500px">
             <v-card>
                 <v-card-title>
                     <span class="headline">Create New Folder</span>
@@ -27,18 +27,26 @@
 </template>
 
 <script>
+    import { modalState } from '../../utils/enums'
+
     export default {
-        
         data () {
             return {
                 folderName: null,
             }
         },
+
+        computed: {
+            addState: {
+                get: function () { return this.$store.getters.getModalState === modalState.FOLDER_ADD },
+                set: function () {},
+            },
+        },
         
         methods: {
             closeModal() {
                 this.clearData()
-                this.$store.dispatch('CLOSE_FOLDER_MODAL')
+                this.$store.dispatch('CLOSE_MODAL')
             },
 
             clearData() {

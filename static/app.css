@@ -17,3 +17,18 @@
     user-select: none;
     cursor: default;
 }
+
+.outline-ghost {
+    opacity: 1;
+    background-image: #4DB6AC; /* teal-lighten-2 */
+    background: #4DB6AC; /* teal-lighten-2 */
+    border-radius: 5px;
+}
+
+.outline-chosen {
+    opacity: 1;
+}
+
+.outline-drag {
+    opacity: 0;
+}

@@ -4,7 +4,7 @@ export default {
         commit('SET_ACTIVE_BOARD', { index: appData.activeBoard })
     },
 
-    
+
     /* Board Actions */
     ADD_NEW_BOARD({ commit, state }, { board }) {
         commit('APPEND_BOARD_TO_LIST', board)
@@ -32,4 +32,11 @@ export default {
         commit('APPEND_FOLDER_TO_BOARD', folder)
     },
 
+    EDIT_ACTIVE_FOLDER({ commit }, { folder }) {
+        commit('UPDATE_ACTIVE_FOLDER', folder)
+    },
+
+    DELETE_ACTIVE_FOLDER({ commit }) {
+        commit('REMOVE_ACTIVE_FOLDER')
+    }
 }

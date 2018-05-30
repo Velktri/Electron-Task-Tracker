@@ -47,13 +47,13 @@
 </template>
 
 <script>
-    import { boardState } from '../utils/enums'
-    import { colors } from '../utils/constants'
+    import { modalState } from '../../utils/enums'
+    import { colors } from '../../utils/constants'
 
     export default {
         computed: {
             editState: {
-                get: function () { return this.$store.getters.getBoardModal === boardState.EDIT },
+                get: function () { return this.$store.getters.getModalState === modalState.BOARD_EDIT },
                 set: function () {},
             },
 
@@ -83,16 +83,13 @@
         data() {
             return {
                 colors,
-
-                //boardName: this.$store.getters.getActiveBoard.name,
-                //selectedColor: this.$store.getters.getActiveBoard.color
             }
         },
 
         methods: {
             closeModal() {
                 this.clearData()
-                this.$store.dispatch('CLOSE_BOARD_MODAL')
+                this.$store.dispatch('CLOSE_MODAL')
             },
 
             clearData() {
@@ -106,7 +103,6 @@
             },
 
             submitData() {
-                console.log(this.$refs)
                 if (this.boardName != null && this.selectedColor != null) {
                     this.$store.dispatch('EDIT_ACTIVE_BOARD', {
                         board: { 

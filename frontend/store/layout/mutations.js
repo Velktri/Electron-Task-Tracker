@@ -3,11 +3,7 @@ export default {
         state.LeftDrawer = !state.LeftDrawer
     },
 
-    SET_BOARD_MODAL(state, newState) {
-        state.boardModal = newState.payload;
-    },
-
-    SET_FOLDER_MODAL(state, newState) {
-        state.folderModal = newState.payload;
+    SET_MODAL_STATE(state, newState) {
+        state.modalState = newState.payload;
     }
 }

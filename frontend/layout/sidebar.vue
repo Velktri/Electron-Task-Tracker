@@ -86,16 +86,15 @@
         </v-container>
 
         <board-modal />
-
         <board-edit-modal />
 
     </v-navigation-drawer>
 </template>
 
 <script>
-    import BoardModal from './boardModal.vue'
+    import BoardModal from './modals/boardModal.vue'
     import draggable from 'vuedraggable'
-    import BoardEditModal from './boardEditModal.vue'
+    import BoardEditModal from './modals/boardEditModal.vue'
 
     export default {
         components: {

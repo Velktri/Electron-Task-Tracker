@@ -23,7 +23,6 @@
 
                         <searchbar />
                     </v-layout>
-
                 </v-flex>
             </v-layout>
         </v-container>
@@ -31,22 +30,35 @@
         <v-divider />
 
         <v-container fluid grid-list-md>
-            <draggable v-model="folderList" element="v-layout" :options="{ draggable:'.drag-folder-item', handle: '.folder-handle' }" row wrap>
+            <draggable 
+            v-model="folderList" 
+            element="v-layout" 
+            :options="{ 
+                draggable:'.drag-folder-item', 
+                handle: '.folder-handle', 
+                dragClass: 'outline-drag', 
+                chosenClass: 'outline-chosen', 
+                ghostClass: 'outline-ghost' 
+            }" 
+            row 
+            wrap
+            >
                 <v-flex 
                 xs12
                 md6
                 lg4
                 xl3
-
                 class="drag-folder-item"
                 :key="i"
                 v-for="(folder, i) in folderList"
                 >
-                    <folder class="folder-handle" :folderData="folder" />
+                    <folder class="folder-handle" :id="i" :folderData="folder" />
                 </v-flex>
             </draggable>
 
             <folder-modal />
+            <folder-edit-modal />
+
         </v-container>
     </div>
 </template>
@@ -54,7 +66,8 @@
 <script>
     import Folder from '../components/folder.vue'
     import searchbar from './searchBar.vue'
-    import folderModal from './addFolderModal.vue'
+    import folderModal from './modals/addFolderModal.vue'
+    import folderEditModal from './modals/folderEditModal.vue'
     import draggable from 'vuedraggable'
 
     export default {
@@ -62,6 +75,7 @@
             'folder': Folder,
             'searchbar': searchbar,
             'folder-modal': folderModal,
+            'folder-edit-modal': folderEditModal,
             draggable
         },
 
@@ -79,7 +93,7 @@
 
         methods: {
             openFolderModal() {
-                this.$store.dispatch('OPEN_FOLDER_MODAL')
+                this.$store.dispatch('OPEN_FOLDER_MODAL_ADD')
             }
         }
     }

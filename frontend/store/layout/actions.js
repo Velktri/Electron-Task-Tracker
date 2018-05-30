@@ -1,5 +1,4 @@
-
-import { boardState } from '../../utils/enums'
+import { modalState } from '../../utils/enums'
 
 export default {
     /* Left Drawer Actions */
@@ -8,26 +7,38 @@ export default {
     },
 
 
-    /* Board Model Actions */
+    /* Board Modal Actions */
     OPEN_BOARD_MODAL_EDIT({ commit }) {
-        commit('SET_BOARD_MODAL', { payload: boardState.EDIT })
+        commit('SET_MODAL_STATE', { payload: modalState.BOARD_EDIT })
     },
 
     OPEN_BOARD_MODAL_ADD({ commit }) {
-        commit('SET_BOARD_MODAL', { payload: boardState.ADD })
-    },
-
-    CLOSE_BOARD_MODAL({ commit }) {
-        commit('SET_BOARD_MODAL', { payload: boardState.NONE })
+        commit('SET_MODAL_STATE', { payload: modalState.BOARD_ADD })
     },
 
 
-    /* Folder Model Actions */
-    OPEN_FOLDER_MODAL({ commit }) {
-        commit('SET_FOLDER_MODAL', { payload: true })
+    /* Folder Modal Actions */
+    OPEN_FOLDER_MODAL_ADD({ commit }) {
+        commit('SET_MODAL_STATE', { payload: modalState.FOLDER_ADD })
     },
 
-    CLOSE_FOLDER_MODAL({ commit }) {
-        commit('SET_FOLDER_MODAL', { payload: false })
-    }
+    OPEN_FOLDER_MODAL_EDIT({ commit }, folderIndex) {
+        commit('SET_MODAL_STATE', { payload: modalState.FOLDER_EDIT })
+        commit('SET_ACTIVE_FOLDER', folderIndex)
+    },
+
+
+    /* Card Modal Actions */
+    OPEN_CARD_MODAL_ADD({ commit }) {
+        commit('SET_MODAL_STATE', { payload: modalState.CARD_ADD })
+    },
+
+    OPEN_CARD_MODAL_EDIT({ commit }) {
+        commit('SET_MODAL_STATE', { payload: modalState.CARD_EDIT })
+    },
+
+
+    CLOSE_MODAL({ commit }) {
+        commit('SET_MODAL_STATE', { payload: modalState.NONE })
+    },
 }

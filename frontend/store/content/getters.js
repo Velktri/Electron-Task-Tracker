@@ -1,5 +1,6 @@
 export default {
     getBoardList: state => { return state.boardList },
+    getActiveFolder: state => { return state.activeFolder },
 
     getActiveBoard: state => { 
         if (state.boardList != undefined && state.boardList.length > 0) {
